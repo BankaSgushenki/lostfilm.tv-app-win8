@@ -12,15 +12,15 @@
         <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="531" Margin="0,124,-554,0" SelectionChanged="gvMain_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Right" Width="330" Height="300">
+                    <Grid HorizontalAlignment="Right" Width="340" Height="240">
                         <Border Background="{StaticResource 
                  ListViewItemPlaceholderBackgroundThemeBrush}">
-                            <Image Source="{Binding imagePath}"  VerticalAlignment="Top" HorizontalAlignment="Center"      Stretch="None"/>
+                            <Image Source="{Binding posterPath}"        Stretch="Fill"/>
                         </Border>
 
                         <StackPanel 
                             VerticalAlignment="Bottom"
-                            Height="150"
+                            Height="50"
                             Background="{StaticResource                  
                             ListViewItemOverlayBackgroundThemeBrush}">
 
