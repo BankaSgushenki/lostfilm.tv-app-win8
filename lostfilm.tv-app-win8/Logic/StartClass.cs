@@ -23,7 +23,6 @@ namespace lostfilm.tv_app_win8.Logic
 
     }
 
-
     static class Data                   
     {
         public delegate void MyEvent(ObservableCollection<Episod> current);

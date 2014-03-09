@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
 using Windows.UI.Popups;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
@@ -24,7 +23,6 @@ namespace lostfilm.tv_app_win8.DataScraping
             {
                 currentEpisods.Add(GetEpisodInfo(html, value));
             }        
-            GetElementIndex(html, "text-decoration:none\">");
             return currentEpisods;
         }
 
@@ -64,6 +62,7 @@ namespace lostfilm.tv_app_win8.DataScraping
             currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodLocation);
             currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodLocation);
             currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
+            currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodLocation);
             EpisodNameFormat(currentEpisod);
             
 

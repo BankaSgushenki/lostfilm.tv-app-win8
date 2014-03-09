@@ -12,6 +12,7 @@ namespace lostfilm.tv_app_win8.Model
         {
             showTitle = "Empty";
             imagePath = "http://www.lostfilm.tv";
+            detailsPath = "http://www.lostfilm.tv/";
         }
         public string showTitle { get; set; }
         public string episodTitle { get; set; }

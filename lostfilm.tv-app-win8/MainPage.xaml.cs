@@ -17,6 +17,7 @@ using Windows.UI.Notifications;
 using NotificationsExtensions.ToastContent;
 using Windows.Data.Xml.Dom;
 using System.Collections.ObjectModel;
+using Windows.System;
 
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
@@ -33,6 +34,7 @@ namespace lostfilm.tv_app_win8
     public sealed partial class MainPage : Page
     {
         private ObservableCollection<Episod> currenEpisods;
+
         public MainPage()
         {
             Data.EventHandler = new Data.MyEvent(show);
@@ -69,6 +71,13 @@ namespace lostfilm.tv_app_win8
              ToastNotificationManager.CreateToastNotifier().Show(toast);   
          
          
+         }
+
+         private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         {
+             Episod Selected = (Episod)gvMain.SelectedItem;
+             Uri url = new Uri(Selected.detailsPath);
+             var success = await Launcher.LaunchUriAsync(url);
          }
 
         
