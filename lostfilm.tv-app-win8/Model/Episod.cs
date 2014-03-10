@@ -21,5 +21,6 @@ namespace lostfilm.tv_app_win8.Model
         public string detailsPath { get; set; }
         public string posterPath { get; set; }
         public string id { get; set; }
+        public string description { get; set; }
     }
 }

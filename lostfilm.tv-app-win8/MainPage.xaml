@@ -14,7 +14,7 @@
             <ColumnDefinition Width="26*"/>
         </Grid.ColumnDefinitions>
 
-        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="531" Margin="0,124,-554,0" SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
+        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="361" Margin="0,124,-554,0" PointerMoved="test"  SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Right" Width="340" Height="260">
@@ -56,11 +56,12 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
+            <TextBox Height="100" TextWrapping="Wrap" Text="TextBox" Width="100"/>
         </GridView>
 
-        <Button Content="Notification test" HorizontalAlignment="Left" Margin="970,32,0,0" VerticalAlignment="Top" Click="Button_Click" Height="79" Width="150"/>
+        <Button Content="Notification test" HorizontalAlignment="Left" Margin="931,13,0,0" VerticalAlignment="Top" Click="Button_Click" Height="39" Width="122"/>
         <TextBlock HorizontalAlignment="Left" Margin="316,16,0,0" TextWrapping="Wrap" Text="lostfilm.tv-app-win8" VerticalAlignment="Top" Height="62" Width="475" FontSize="36"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="788,32,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click_1" Height="79"/>
+        <TextBlock x:Name="descriptionBox" HorizontalAlignment="Left" Margin="128,485,0,-182" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="465" Width="1118"/>
 
     </Grid>
 </Page>

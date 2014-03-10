@@ -22,7 +22,7 @@ namespace lostfilm.tv_app_win8.DataScraping
             foreach (var value in indexes)
             {
                 currentEpisods.Add(GetEpisodInfo(html, value));
-            }        
+            }   
             return currentEpisods;
         }
 

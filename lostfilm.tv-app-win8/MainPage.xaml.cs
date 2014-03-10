@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
 using lostfilm.tv_app_win8.Model;
+using lostfilm.tv_app_win8.DataScraping;
 //using SDKTemplateCS;
 
 // Шаблон элемента пустой страницы задокументирован по адресу http://go.microsoft.com/fwlink/?LinkId=234238
@@ -36,6 +37,8 @@ namespace lostfilm.tv_app_win8
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        string currentLastEpisod;
+
         private ObservableCollection<Episod> currenEpisods;
 
         private DispatcherTimer timer = new DispatcherTimer();
@@ -43,7 +46,7 @@ namespace lostfilm.tv_app_win8
         public MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 100);
+            timer.Interval = new TimeSpan(00, 0, 10);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -72,33 +75,28 @@ namespace lostfilm.tv_app_win8
          void timer_Tick(object sender, object e)
          {
              StartClass.start("http://www.lostfilm.tv");
-             NotificationSend();
+
+             if (currenEpisods.First().showTitle != currentLastEpisod)
+             {
+                NotificationSend();
+                currentLastEpisod = currenEpisods.First().showTitle;
+             }
          }
 
          private void NotificationSend()
-         {
-             IToastNotificationContent toastContent = null;
-             IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
-             templateContent.TextHeadingWrap.Text = currenEpisods.First().showTitle + " (new episod on lostfilm.tv)";
-             templateContent.TextBody.Text = currenEpisods.First().episodTitle;
-             templateContent.Image.Src = currenEpisods.First().imagePath;
-             toastContent = templateContent;
-             ToastNotification toast = toastContent.CreateNotification();
-             ToastNotificationManager.CreateToastNotifier().Show(toast);          
+         {            
+                 IToastNotificationContent toastContent = null;
+                 IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
+                 templateContent.TextHeadingWrap.Text = currenEpisods.First().showTitle + " - новая серия уже доступна.";
+                 templateContent.TextBody.Text = currenEpisods.First().episodTitle;
+                 templateContent.Image.Src = currenEpisods.First().imagePath;
+                 toastContent = templateContent;
+                 ToastNotification toast = toastContent.CreateNotification();
+                 ToastNotificationManager.CreateToastNotifier().Show(toast);     
          }
 
          private void TitleUpdate()
          {
-             /*var xmlDocument = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWideBlockAndText01);
-             var nodes = xmlDocument.GetElementsByTagName("binding").First().ChildNodes;
-
-             nodes[0].InnerText = currenEpisods.Last().showTitle;
-             nodes[1].InnerText = currenEpisods.First().episodTitle; 
-
-             var notification = new TileNotification(xmlDocument);
-             var updateManager = TileUpdateManager.CreateTileUpdaterForApplication(); 
-             updateManager.Update(notification); */
-
              ITileWideBlockAndText01 tileContent = TileContentFactory.CreateTileWideBlockAndText01();
              tileContent.TextBody1.Text = currenEpisods.Last().showTitle; ;
              tileContent.TextBody2.Text = currenEpisods.First().episodTitle; 
@@ -109,9 +107,23 @@ namespace lostfilm.tv_app_win8
          private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
              Episod Selected = (Episod)gvMain.SelectedItem;
-             Uri url = new Uri(Selected.detailsPath);
-             var success = await Launcher.LaunchUriAsync(url);
+             if (Selected != null)
+             {
+                 Uri url = new Uri(Selected.detailsPath);                 
+                 var success = await Launcher.LaunchUriAsync(url);
+
+             }
          }
+
+         private async void test(object sender, PointerRoutedEventArgs e)
+         {
+             /*Episod Selected = (Episod)gvMain.SelectedItem;
+             string responce = await Request.getInfo(Selected.detailsPath);               
+             Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
+             Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
+             descriptionBox.Text = Selected.description;*/
+         }
+
         
         
     }
