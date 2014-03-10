@@ -7,20 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FF4F4F4F">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="628*"/>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="26*"/>
+        </Grid.ColumnDefinitions>
 
-        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="531" Margin="0,124,-554,0" SelectionChanged="gvMain_SelectionChanged">
+        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="531" Margin="0,124,-554,0" SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Right" Width="340" Height="240">
+                    <Grid HorizontalAlignment="Right" Width="340" Height="260">
                         <Border Background="{StaticResource 
                  ListViewItemPlaceholderBackgroundThemeBrush}">
-                            <Image Source="{Binding posterPath}"        Stretch="Fill"/>
+                            <Image Source="{Binding posterPath}"  VerticalAlignment="Top" HorizontalAlignment="Stretch"      />
                         </Border>
 
                         <StackPanel 
                             VerticalAlignment="Bottom"
-                            Height="50"
+                            Height="70"
                             Background="{StaticResource                  
                             ListViewItemOverlayBackgroundThemeBrush}">
 
@@ -33,6 +38,13 @@
                             Margin="15,0,15,0"/>
 
                             <TextBlock Text="{Binding episodTitle}" 
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left"
+                            Foreground="{StaticResource                                           
+                            ListViewItemOverlayForegroundThemeBrush}"                                   
+                            Margin="15,0,15,0"/>
+
+                            <TextBlock Text="{Binding id}" 
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Left"
                             Foreground="{StaticResource                                           

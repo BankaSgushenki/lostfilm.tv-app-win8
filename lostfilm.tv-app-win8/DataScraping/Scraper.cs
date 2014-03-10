@@ -64,6 +64,7 @@ namespace lostfilm.tv_app_win8.DataScraping
             currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
             currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodLocation);
             currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodLocation);
+            currentEpisod.id = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
 
             EpisodNameFormat(currentEpisod);
             
@@ -75,7 +76,11 @@ namespace lostfilm.tv_app_win8.DataScraping
         {
             string pattern = "<wbr>";
             Regex rgx = new Regex(pattern);
-            currentEpisod.episodTitle = rgx.Replace(currentEpisod.episodTitle, "");    
+            currentEpisod.episodTitle = rgx.Replace(currentEpisod.episodTitle, "");
+
+            string pattern2 = "'";
+            Regex rgx2 = new Regex(pattern2);
+            currentEpisod.id = rgx.Replace(currentEpisod.id, "");    
         
         }
     }
