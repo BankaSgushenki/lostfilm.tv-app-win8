@@ -41,6 +41,8 @@ namespace lostfilm.tv_app_win8
 
         private ObservableCollection<Episod> currenEpisods;
 
+        Episod Selected = new Episod();
+
         private DispatcherTimer timer = new DispatcherTimer();
 
         public MainPage()
@@ -79,6 +81,7 @@ namespace lostfilm.tv_app_win8
              if (currenEpisods.First().showTitle != currentLastEpisod)
              {
                 NotificationSend();
+                TitleUpdate();
                 currentLastEpisod = currenEpisods.First().showTitle;
              }
          }
@@ -97,22 +100,30 @@ namespace lostfilm.tv_app_win8
 
          private void TitleUpdate()
          {
-             ITileWideBlockAndText01 tileContent = TileContentFactory.CreateTileWideBlockAndText01();
-             tileContent.TextBody1.Text = currenEpisods.Last().showTitle; ;
-             tileContent.TextBody2.Text = currenEpisods.First().episodTitle; 
-             //TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
+             ITileSquareBlock tileContent = TileContentFactory.CreateTileSquareBlock();
+             tileContent.TextBlock.Text = currenEpisods.Last().showTitle;
+             tileContent.TextSubBlock.Text = currenEpisods.First().episodTitle; 
+             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
          }
 
 
          private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
-             Episod Selected = (Episod)gvMain.SelectedItem;
+             /*Episod Selected = (Episod)gvMain.SelectedItem;
              if (Selected != null)
              {
                  Uri url = new Uri(Selected.detailsPath);                 
                  var success = await Launcher.LaunchUriAsync(url);
 
+             }*/
+             Selected = (Episod)gvMain.SelectedItem;
+             if (Selected != null)
+             {
+                 descriptionBox.Text = await Scraper.findDescription(Selected);
              }
+             
+
+
          }
 
          private async void test(object sender, PointerRoutedEventArgs e)
@@ -122,6 +133,16 @@ namespace lostfilm.tv_app_win8
              Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
              Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
              descriptionBox.Text = Selected.description;*/
+         }
+
+         private async  void Button_Click_2(object sender, RoutedEventArgs e)
+         {           
+            if (Selected != null)
+            {
+                Uri url = new Uri(Selected.detailsPath);                 
+                var success = await Launcher.LaunchUriAsync(url);
+
+            }
          }
 
         

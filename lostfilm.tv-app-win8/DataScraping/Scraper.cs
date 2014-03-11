@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
 using lostfilm.tv_app_win8.Model;
+using lostfilm.tv_app_win8.DataFetchers;
 
 namespace lostfilm.tv_app_win8.DataScraping
 {
@@ -82,6 +83,17 @@ namespace lostfilm.tv_app_win8.DataScraping
             Regex rgx2 = new Regex(pattern2);
             currentEpisod.id = rgx.Replace(currentEpisod.id, "");    
         
+        }
+
+        public async static Task<string> findDescription(Episod Selected)
+        {
+            string responce = await Request.getInfo(Selected.detailsPath);
+            Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
+            Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
+            string pattern = "<br>";
+            Regex rgx = new Regex(pattern);
+            Selected.description = rgx.Replace(Selected.description, "");
+            return Selected.description;
         }
     }
 }
