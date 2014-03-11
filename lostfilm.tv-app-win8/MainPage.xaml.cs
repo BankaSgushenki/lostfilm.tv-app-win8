@@ -37,7 +37,7 @@ namespace lostfilm.tv_app_win8
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        string currentLastEpisod;
+        string currentFirstEpisod;
 
         private ObservableCollection<Episod> currenEpisods;
 
@@ -48,7 +48,7 @@ namespace lostfilm.tv_app_win8
         public MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 10);
+            timer.Interval = new TimeSpan(00, 0, 15);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -57,10 +57,22 @@ namespace lostfilm.tv_app_win8
 
         }
 
-        void show(ObservableCollection<Episod> current)
+        async void show(ObservableCollection<Episod> current)
         {
-            currenEpisods = current;           
-            gvMain.ItemsSource = currenEpisods;
+            if (currentFirstEpisod == null)
+            {
+                foreach (var value in current)
+                    await Scraper.findDescription(value);
+            }
+
+            if (current.First().showTitle != currentFirstEpisod)
+            {
+                currenEpisods = current;
+                gvMain.ItemsSource = currenEpisods;
+                NotificationSend();
+                TitleUpdate();
+                currentFirstEpisod = currenEpisods.First().showTitle;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -69,21 +81,16 @@ namespace lostfilm.tv_app_win8
             TitleUpdate();
         }
 
-         private void Button_Click_1(object sender, RoutedEventArgs e)
-         {
-             StartClass.start("http://www.lostfilm.tv");
-         }
-
          void timer_Tick(object sender, object e)
          {
              StartClass.start("http://www.lostfilm.tv");
 
-             if (currenEpisods.First().showTitle != currentLastEpisod)
+             /*if (currenEpisods.First().showTitle != currentFirstEpisod)
              {
                 NotificationSend();
                 TitleUpdate();
-                currentLastEpisod = currenEpisods.First().showTitle;
-             }
+                currentFirstEpisod = currenEpisods.First().showTitle;
+             }*/
          }
 
          private void NotificationSend()
@@ -112,7 +119,7 @@ namespace lostfilm.tv_app_win8
              Selected = (Episod)gvMain.SelectedItem;
              if (Selected != null)
              {
-                 descriptionBox.Text = await Scraper.findDescription(Selected);
+                 descriptionBox.Text = Selected.description;
              }
          }
 

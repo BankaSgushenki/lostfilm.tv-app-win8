@@ -47,7 +47,7 @@
                             ListViewItemOverlayForegroundThemeBrush}"                                   
                             Margin="15,0,15,0"/>
 
-                            <TextBlock Text="{Binding id}" 
+                            <TextBlock Text="{Binding rating}" 
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Left"
                             Foreground="{StaticResource                                           

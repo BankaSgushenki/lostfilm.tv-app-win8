@@ -85,15 +85,19 @@ namespace lostfilm.tv_app_win8.DataScraping
         
         }
 
-        public async static Task<string> findDescription(Episod Selected)
+        public async static Task findDescription(Episod Selected)
         {
             string responce = await Request.getInfo(Selected.detailsPath);
             Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
             Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
+
             string pattern = "<br>";
             Regex rgx = new Regex(pattern);
             Selected.description = rgx.Replace(Selected.description, "");
-            return Selected.description;
+
+            Selected.rating = Scraper.GetHtmlString("color:gray", "label", responce, 0);
+            Selected.rating = Scraper.GetHtmlString("<span><b>", "</b>", responce, 0);
+
         }
     }
 }
