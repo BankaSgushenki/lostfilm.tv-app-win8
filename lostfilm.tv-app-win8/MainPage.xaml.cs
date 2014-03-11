@@ -101,7 +101,7 @@ namespace lostfilm.tv_app_win8
          private void TitleUpdate()
          {
              ITileSquareBlock tileContent = TileContentFactory.CreateTileSquareBlock();
-             tileContent.TextBlock.Text = currenEpisods.Last().showTitle;
+             tileContent.TextBlock.Text = currenEpisods.First().showTitle;
              tileContent.TextSubBlock.Text = currenEpisods.First().episodTitle; 
              TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
          }
@@ -109,30 +109,11 @@ namespace lostfilm.tv_app_win8
 
          private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
-             /*Episod Selected = (Episod)gvMain.SelectedItem;
-             if (Selected != null)
-             {
-                 Uri url = new Uri(Selected.detailsPath);                 
-                 var success = await Launcher.LaunchUriAsync(url);
-
-             }*/
              Selected = (Episod)gvMain.SelectedItem;
              if (Selected != null)
              {
                  descriptionBox.Text = await Scraper.findDescription(Selected);
              }
-             
-
-
-         }
-
-         private async void test(object sender, PointerRoutedEventArgs e)
-         {
-             /*Episod Selected = (Episod)gvMain.SelectedItem;
-             string responce = await Request.getInfo(Selected.detailsPath);               
-             Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
-             Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
-             descriptionBox.Text = Selected.description;*/
          }
 
          private async  void Button_Click_2(object sender, RoutedEventArgs e)
@@ -141,11 +122,8 @@ namespace lostfilm.tv_app_win8
             {
                 Uri url = new Uri(Selected.detailsPath);                 
                 var success = await Launcher.LaunchUriAsync(url);
-
             }
          }
-
-        
-        
+       
     }
 }

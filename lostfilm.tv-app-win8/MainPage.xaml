@@ -17,7 +17,7 @@
             <ColumnDefinition Width="26*"/>
         </Grid.ColumnDefinitions>
 
-        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="361" Margin="0,124,-554,0" PointerMoved="test"  SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
+        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="361" Margin="0,124,-554,0"   SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
             <GridView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Right" Width="340" Height="300">
