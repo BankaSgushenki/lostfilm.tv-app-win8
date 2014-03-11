@@ -48,7 +48,7 @@ namespace lostfilm.tv_app_win8
         public MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 15);
+            timer.Interval = new TimeSpan(00, 0, 150);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -59,14 +59,10 @@ namespace lostfilm.tv_app_win8
 
         async void show(ObservableCollection<Episod> current)
         {
-            if (currentFirstEpisod == null)
+            if (current.First().showTitle != currentFirstEpisod)
             {
                 foreach (var value in current)
                     await Scraper.findDescription(value);
-            }
-
-            if (current.First().showTitle != currentFirstEpisod)
-            {
                 currenEpisods = current;
                 gvMain.ItemsSource = currenEpisods;
                 NotificationSend();
@@ -75,7 +71,7 @@ namespace lostfilm.tv_app_win8
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void Button_Click(object sender, RoutedEventArgs e)
         {
             NotificationSend();
             TitleUpdate();
@@ -93,7 +89,7 @@ namespace lostfilm.tv_app_win8
              }*/
          }
 
-         private void NotificationSend()
+         void NotificationSend()
          {            
                  IToastNotificationContent toastContent = null;
                  IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
@@ -105,7 +101,7 @@ namespace lostfilm.tv_app_win8
                  ToastNotificationManager.CreateToastNotifier().Show(toast);     
          }
 
-         private void TitleUpdate()
+         void TitleUpdate()
          {
              ITileSquareBlock tileContent = TileContentFactory.CreateTileSquareBlock();
              tileContent.TextBlock.Text = currenEpisods.First().showTitle;
@@ -114,7 +110,7 @@ namespace lostfilm.tv_app_win8
          }
 
 
-         private async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
              Selected = (Episod)gvMain.SelectedItem;
              if (Selected != null)
@@ -123,7 +119,7 @@ namespace lostfilm.tv_app_win8
              }
          }
 
-         private async  void Button_Click_2(object sender, RoutedEventArgs e)
+         async  void Button_Click_2(object sender, RoutedEventArgs e)
          {           
             if (Selected != null)
             {

@@ -14,6 +14,7 @@ namespace lostfilm.tv_app_win8.Model
             imagePath = "http://www.lostfilm.tv";
             detailsPath = "http://www.lostfilm.tv/";
             posterPath = "http://www.lostfilm.tv/Static/posters/poster_";
+            rating = "Рейтинг: ";
         }
         public string showTitle { get; set; }
         public string episodTitle { get; set; }

@@ -95,9 +95,9 @@ namespace lostfilm.tv_app_win8.DataScraping
             Regex rgx = new Regex(pattern);
             Selected.description = rgx.Replace(Selected.description, "");
 
-            Selected.rating = Scraper.GetHtmlString("color:gray", "label", responce, 0);
-            Selected.rating = Scraper.GetHtmlString("<span><b>", "</b>", responce, 0);
-
+            string temp = Scraper.GetHtmlString("color:gray", "label", responce, 0);
+            temp = Scraper.GetHtmlString("<span><b>", "</b>", responce, 0);
+            Selected.rating += temp;
         }
     }
 }
