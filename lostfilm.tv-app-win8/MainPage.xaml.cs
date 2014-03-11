@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using Windows.System;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
@@ -48,7 +49,7 @@ namespace lostfilm.tv_app_win8
         public MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 150);
+            timer.Interval = new TimeSpan(00, 0, 200);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -68,6 +69,7 @@ namespace lostfilm.tv_app_win8
                 NotificationSend();
                 TitleUpdate();
                 currentFirstEpisod = currenEpisods.First().showTitle;
+                gvMain.Visibility = Visibility.Visible;
             }
         }
 
@@ -81,12 +83,6 @@ namespace lostfilm.tv_app_win8
          {
              StartClass.start("http://www.lostfilm.tv");
 
-             /*if (currenEpisods.First().showTitle != currentFirstEpisod)
-             {
-                NotificationSend();
-                TitleUpdate();
-                currentFirstEpisod = currenEpisods.First().showTitle;
-             }*/
          }
 
          void NotificationSend()
@@ -96,8 +92,11 @@ namespace lostfilm.tv_app_win8
                  templateContent.TextHeadingWrap.Text = currenEpisods.First().showTitle + " - новая серия уже доступна.";
                  templateContent.TextBody.Text = currenEpisods.First().episodTitle;
                  templateContent.Image.Src = currenEpisods.First().imagePath;
+                 templateContent.Launch = "{\"type\":\"toast\",\"param1\":\"12345\",\"param2\":\"67890\"}";
+
                  toastContent = templateContent;
                  ToastNotification toast = toastContent.CreateNotification();
+               
                  ToastNotificationManager.CreateToastNotifier().Show(toast);     
          }
 
@@ -127,6 +126,14 @@ namespace lostfilm.tv_app_win8
                 var success = await Launcher.LaunchUriAsync(url);
             }
          }
+
+        /* protected  override void OnLaunched(LaunchActivatedEventArgs args)
+         {
+             string launchString = args.Arguments;
+             
+
+         }*/
+
        
     }
 }

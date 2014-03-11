@@ -17,10 +17,10 @@
             <ColumnDefinition Width="26*"/>
         </Grid.ColumnDefinitions>
 
-        <GridView x:Name="gvMain" VerticalAlignment="Top" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="361" Margin="0,124,-554,0"   SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
+        <GridView x:Name="gvMain" VerticalAlignment="Top" Visibility="Collapsed" Padding="116,37,40,46" Foreground="#FF403D3D" BorderBrush="Black" Background="Transparent"  HorizontalAlignment="Left" Width="1920" Height="470" Margin="0,124,-554,0"   SelectionChanged="gvMain_SelectionChanged" Grid.ColumnSpan="3">
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Right" Width="340" Height="300">
+                    <Grid HorizontalAlignment="Right" Width="340" Height="340">
                         <Border Background="{StaticResource 
                  ListViewItemPlaceholderBackgroundThemeBrush}">
                             <Image Source="{Binding posterPath}"  VerticalAlignment="Top" HorizontalAlignment="Stretch"      />
@@ -28,7 +28,7 @@
 
                         <StackPanel 
                             VerticalAlignment="Bottom"
-                            Height="110"
+                            Height="150"
                             Background="{StaticResource                  
                             ListViewItemOverlayBackgroundThemeBrush}">
 
@@ -54,6 +54,10 @@
                             ListViewItemOverlayForegroundThemeBrush}"                                   
                             Margin="15,0,15,0"/>
 
+                            <Button x:Name="button1" 
+                            Content="Перейти на сайт" 
+                            HorizontalAlignment="Center"  
+                            VerticalAlignment="Top" Width="200" Height="50" Click="Button_Click_2"/>
                         </StackPanel>
 
                     </Grid>
@@ -64,8 +68,7 @@
 
         <Button Content="Notification test" HorizontalAlignment="Left" Margin="931,13,0,0" VerticalAlignment="Top" Click="Button_Click" Height="39" Width="122"/>
         <TextBlock HorizontalAlignment="Left" Margin="316,16,0,0" TextWrapping="Wrap" Text="lostfilm.tv-app-win8" VerticalAlignment="Top" Height="62" Width="475" FontSize="36"/>
-        <TextBlock x:Name="descriptionBox" HorizontalAlignment="Left" Margin="128,485,0,-182" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="465" Width="1118"/>
-        <Button x:Name="button1" Content="Перейти на сайт" HorizontalAlignment="Left" Margin="1362,526,0,0" VerticalAlignment="Top" Width="262" Height="116" Click="Button_Click_2"/>
+        <TextBox x:Name="descriptionBox" HorizontalAlignment="Left" BorderThickness="0" IsReadOnly="True" Background="Transparent" Margin="128,591,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="359" Width="1118" Foreground="White"/>
 
     </Grid>
 </Page>
