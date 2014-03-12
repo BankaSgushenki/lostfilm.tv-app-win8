@@ -27,7 +27,6 @@ using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
 using lostfilm.tv_app_win8.Model;
 using lostfilm.tv_app_win8.DataScraping;
-//using SDKTemplateCS;
 
 // Шаблон элемента пустой страницы задокументирован по адресу http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,7 +37,7 @@ namespace lostfilm.tv_app_win8
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        string currentFirstEpisod;
+        Episod currentFirstEpisod;
 
         private ObservableCollection<Episod> currenEpisods;
 
@@ -60,56 +59,33 @@ namespace lostfilm.tv_app_win8
 
         async void show(ObservableCollection<Episod> current)
         {
-            if (current.First().showTitle != currentFirstEpisod)
+            if (current.First() != currentFirstEpisod)
             {
                 foreach (var value in current)
-                    await Scraper.findDescription(value);
+                {
+                    if (value.description == null)
+                        await Scraper.findDescription(value);
+                }
                 currenEpisods = current;
                 gvMain.ItemsSource = currenEpisods;
-                NotificationSend();
-                TitleUpdate();
-                currentFirstEpisod = currenEpisods.First().showTitle;
+                Notifications.Start(currenEpisods.First());  
+                currentFirstEpisod = currenEpisods.First();
                 gvMain.Visibility = Visibility.Visible;
             }
         }
 
         void Button_Click(object sender, RoutedEventArgs e)
         {
-            NotificationSend();
-            TitleUpdate();
+            Notifications.Start(currenEpisods.First());           
         }
 
          void timer_Tick(object sender, object e)
          {
              StartClass.start("http://www.lostfilm.tv");
-
-         }
-
-         void NotificationSend()
-         {            
-                 IToastNotificationContent toastContent = null;
-                 IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
-                 templateContent.TextHeadingWrap.Text = currenEpisods.First().showTitle + " - новая серия уже доступна.";
-                 templateContent.TextBody.Text = currenEpisods.First().episodTitle;
-                 templateContent.Image.Src = currenEpisods.First().imagePath;
-                 templateContent.Launch = "{\"type\":\"toast\",\"param1\":\"12345\",\"param2\":\"67890\"}";
-
-                 toastContent = templateContent;
-                 ToastNotification toast = toastContent.CreateNotification();
-               
-                 ToastNotificationManager.CreateToastNotifier().Show(toast);     
-         }
-
-         void TitleUpdate()
-         {
-             ITileSquareBlock tileContent = TileContentFactory.CreateTileSquareBlock();
-             tileContent.TextBlock.Text = currenEpisods.First().showTitle;
-             tileContent.TextSubBlock.Text = currenEpisods.First().episodTitle; 
-             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
          }
 
 
-         async void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
              Selected = (Episod)gvMain.SelectedItem;
              if (Selected != null)
@@ -126,14 +102,6 @@ namespace lostfilm.tv_app_win8
                 var success = await Launcher.LaunchUriAsync(url);
             }
          }
-
-        /* protected  override void OnLaunched(LaunchActivatedEventArgs args)
-         {
-             string launchString = args.Arguments;
-             
-
-         }*/
-
        
     }
 }
