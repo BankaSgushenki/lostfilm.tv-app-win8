@@ -22,6 +22,7 @@ using Windows.System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel;
 
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
@@ -45,10 +46,10 @@ namespace lostfilm.tv_app_win8
 
         private DispatcherTimer timer = new DispatcherTimer();
 
-        public MainPage()
+        public  MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 10);
+            timer.Interval = new TimeSpan(00, 0, 100);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -56,6 +57,7 @@ namespace lostfilm.tv_app_win8
             StartClass.start("http://www.lostfilm.tv");
 
         }
+
 
         void show(ObservableCollection<Episod> current)
         {
@@ -90,7 +92,7 @@ namespace lostfilm.tv_app_win8
              }
          }
 
-         async  void Button_Click_2(object sender, RoutedEventArgs e)
+         async void Button_Click_2(object sender, RoutedEventArgs e)
          {           
             if (Selected != null)
             {

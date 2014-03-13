@@ -54,6 +54,13 @@
                             ListViewItemOverlayForegroundThemeBrush}"                                   
                             Margin="15,0,15,0"/>
 
+                            <TextBlock Text="{Binding id}" 
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Left"
+                            Foreground="{StaticResource                                           
+                            ListViewItemOverlayForegroundThemeBrush}"                                   
+                            Margin="15,0,15,0"/>
+
                             <Button x:Name="button1" 
                             Content="Перейти на сайт" 
                             HorizontalAlignment="Center"  
@@ -68,7 +75,7 @@
 
         <Button Content="Notification test" Visibility="Collapsed" HorizontalAlignment="Left" Margin="931,13,0,0" VerticalAlignment="Top" Click="Button_Click" Height="39" Width="122"/>
         <TextBlock HorizontalAlignment="Left" Margin="613,62,0,0" TextWrapping="Wrap" Text="Недавно добавленное на Lostfilm.tv" VerticalAlignment="Top" Height="62" Width="649" FontSize="36"/>
-        <TextBox x:Name="descriptionBox" HorizontalAlignment="Left" BorderThickness="0" IsReadOnly="True" Background="Transparent" Margin="128,591,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="359" Width="1118" Foreground="White"/>
+        <TextBox x:Name="descriptionBox"  HorizontalAlignment="Left" BorderThickness="0" IsReadOnly="True" Background="Transparent" Margin="128,591,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="359" Width="1118" Foreground="White"/>
 
     </Grid>
 </Page>
