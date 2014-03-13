@@ -15,14 +15,14 @@ namespace lostfilm.tv_app_win8.DataScraping
     class Scraper
     {
 
-        public static ObservableCollection<Episod> scrap(string html)
+        public async static Task<ObservableCollection<Episod>> scrap(string html)
         {
             List<int> indexes = new List<int>();
             ObservableCollection<Episod> currentEpisods = new ObservableCollection<Episod>();
             indexes = GetElementIndex(html, "text-decoration:none\">");
             foreach (var value in indexes)
             {
-                currentEpisods.Add(GetEpisodInfo(html, value));
+               currentEpisods.Add(await GetEpisodInfo(html, value));
             }   
             return currentEpisods;
         }
@@ -57,7 +57,7 @@ namespace lostfilm.tv_app_win8.DataScraping
             return index;
         }
 
-        public static Episod GetEpisodInfo(string html, int EpisodLocation)
+        public async static Task<Episod> GetEpisodInfo(string html, int EpisodLocation)
         {
             Episod currentEpisod = new Episod();
             currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodLocation);
@@ -67,6 +67,7 @@ namespace lostfilm.tv_app_win8.DataScraping
             currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodLocation);
             currentEpisod.id = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
             EpisodNameFormat(currentEpisod);
+            await Scraper.findDescription(currentEpisod);
             return currentEpisod;
         }
 

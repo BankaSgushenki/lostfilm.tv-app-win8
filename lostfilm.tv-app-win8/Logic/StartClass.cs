@@ -18,7 +18,7 @@ namespace lostfilm.tv_app_win8.Logic
         public static async void start(string URL)
         {
             string responce = await Request.getInfo(URL);
-            Data.EventHandler( Scraper.scrap(responce));             
+            Data.EventHandler(await Scraper.scrap(responce));             
         }
 
     }

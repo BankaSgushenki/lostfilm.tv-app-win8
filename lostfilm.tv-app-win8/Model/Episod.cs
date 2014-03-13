@@ -24,5 +24,17 @@ namespace lostfilm.tv_app_win8.Model
         public string id { get; set; }
         public string description { get; set; }
         public string rating { get; set; }
+
+        public static bool Equals(Episod a, Episod b)
+        {
+            if (b == null)
+                return false;
+            if (a.episodTitle == b.episodTitle)
+                return true;
+            else
+                return false;
+
+
+        }
     }
 }

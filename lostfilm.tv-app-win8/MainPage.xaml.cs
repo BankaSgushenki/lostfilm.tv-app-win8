@@ -48,7 +48,7 @@ namespace lostfilm.tv_app_win8
         public MainPage()
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 200);
+            timer.Interval = new TimeSpan(00, 0, 10);
             timer.Start();
 
             Data.EventHandler = new Data.MyEvent(show);
@@ -57,19 +57,15 @@ namespace lostfilm.tv_app_win8
 
         }
 
-        async void show(ObservableCollection<Episod> current)
+        void show(ObservableCollection<Episod> current)
         {
-            if (current.First() != currentFirstEpisod)
+            if (!Episod.Equals(current.First(), currentFirstEpisod))
             {
-                foreach (var value in current)
-                {
-                    if (value.description == null)
-                        await Scraper.findDescription(value);
-                }
                 currenEpisods = current;
-                gvMain.ItemsSource = currenEpisods;
-                Notifications.Start(currenEpisods.First());  
                 currentFirstEpisod = currenEpisods.First();
+                Notifications.Start(currenEpisods.First());
+
+                gvMain.ItemsSource = currenEpisods;
                 gvMain.Visibility = Visibility.Visible;
             }
         }
