@@ -23,7 +23,7 @@
         <m2:ApplicationView MinWidth="default" />
       </m2:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="WindowsRuntimeComponent.WindowsRuntimeComponent">
+        <Extension Category="windows.backgroundTasks" EntryPoint="WindowsRuntimeComponent.SampleBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
             <Task Type="pushNotification" />

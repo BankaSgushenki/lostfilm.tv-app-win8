@@ -47,34 +47,14 @@ namespace lostfilm.tv_app_win8
 
         private DispatcherTimer timer = new DispatcherTimer();
 
-        private async void RegisterBackgroundTask()
+        private void RegisterBackgroundTask()
         {
-            try
-            {
-                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
-                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
-                {
-                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
-                    if (!isRegistered)
-                    {
-                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
-                        {
-                            Name = "Notification task",
-                            TaskEntryPoint =
-                                "BackgroundTask.NotificationTask.NotificationTask"
-                        };
-                        builder.SetTrigger(new TimeTrigger(60, false));
-                        builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-                        BackgroundTaskRegistration task = builder.Register();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                //Debug.WriteLine("The access has already been granted");
-            }
-
+            var timerTrigger = new SystemTrigger(SystemTriggerType.TimeZoneChange, false);
+            var builder = new BackgroundTaskBuilder();
+            builder.Name = "SampleBackgroundTask"; builder.TaskEntryPoint = "WindowsRuntimeComponent.SampleBackgroundTask"; builder.SetTrigger(timerTrigger);
+            BackgroundTaskRegistration task = builder.Register(); 
         }
+
         public  MainPage()
         {
             RegisterBackgroundTask();

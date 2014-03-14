@@ -144,6 +144,12 @@
       <HintPath>..\packages\NotificationsExtensions.WinRT.1.0.1\lib\netcore45\NotificationsExtensions.WinRT.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WindowsRuntimeComponent\WindowsRuntimeComponent.csproj">
+      <Project>{e6039707-90df-4380-b65f-c5293a0290f2}</Project>
+      <Name>WindowsRuntimeComponent</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -4,11 +4,12 @@ using Windows.UI.Notifications;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Windows.ApplicationModel.Background;
+using Windows.UI.Popups;
 
 
 namespace WindowsRuntimeComponent
 {
-    public sealed class Class1
+    public sealed class SampleBackgroundTask : IBackgroundTask 
     {
         private void SendNotification(string text)
         {
@@ -26,13 +27,15 @@ namespace WindowsRuntimeComponent
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            //BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
-
-            SendNotification("This is a toast notification");
-            //we launch an async operation using the async / await pattern    
-            //await StartClass.start("http://www.lostfilm.tv");;
-
-            //deferral.Complete();
+            var deferral = taskInstance.GetDeferral(); 
+        try        
+        {
+            SendNotification("asdasdasdasdasdsad");
+        }  
+        finally        
+        {           
+            deferral.Complete();        
+        }   
         }
     }
 }
