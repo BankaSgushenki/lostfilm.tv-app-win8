@@ -49,14 +49,18 @@ namespace lostfilm.tv_app_win8
 
         private void RegisterBackgroundTask()
         {
-            var timerTrigger = new SystemTrigger(SystemTriggerType.TimeZoneChange, false);
+            foreach (var value in BackgroundTaskRegistration.AllTasks) 
+                value.Value.Unregister(true);
+
+            var timerTrigger = new TimeTrigger(15, false);
             var builder = new BackgroundTaskBuilder();
             builder.Name = "SampleBackgroundTask"; builder.TaskEntryPoint = "WindowsRuntimeComponent.SampleBackgroundTask"; builder.SetTrigger(timerTrigger);
             BackgroundTaskRegistration task = builder.Register(); 
         }
+       
 
         public  MainPage()
-        {
+        {        
             RegisterBackgroundTask();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(00, 0, 100);
@@ -65,7 +69,6 @@ namespace lostfilm.tv_app_win8
             Data.EventHandler = new Data.MyEvent(show);
             this.InitializeComponent();          
             StartClass.start("http://www.lostfilm.tv");
-
         }
 
 
