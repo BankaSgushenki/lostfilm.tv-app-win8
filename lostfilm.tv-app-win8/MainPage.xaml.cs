@@ -23,6 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Background;
 
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
@@ -46,8 +47,37 @@ namespace lostfilm.tv_app_win8
 
         private DispatcherTimer timer = new DispatcherTimer();
 
+        private async void RegisterBackgroundTask()
+        {
+            try
+            {
+                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "Notification task");
+                    if (!isRegistered)
+                    {
+                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
+                        {
+                            Name = "Notification task",
+                            TaskEntryPoint =
+                                "BackgroundTask.NotificationTask.NotificationTask"
+                        };
+                        builder.SetTrigger(new TimeTrigger(60, false));
+                        builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                        BackgroundTaskRegistration task = builder.Register();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //Debug.WriteLine("The access has already been granted");
+            }
+
+        }
         public  MainPage()
         {
+            RegisterBackgroundTask();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(00, 0, 100);
             timer.Start();
