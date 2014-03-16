@@ -81,7 +81,7 @@ namespace lostfilm.tv_app_win8
                 Notifications.Start(currenEpisods.First());
 
                 gvMain.ItemsSource = currenEpisods;
-                gvMain.Visibility = Visibility.Visible;
+                InterfaceIsVisible();
             }
         }
 
@@ -106,13 +106,24 @@ namespace lostfilm.tv_app_win8
          }
 
          async void Button_Click_2(object sender, RoutedEventArgs e)
-         {           
+         {
+            
             if (Selected != null)
             {
                 Uri url = new Uri(Selected.detailsPath);                 
                 var success = await Launcher.LaunchUriAsync(url);
             }
          }
-       
+
+         private void Refresh_Click(object sender, RoutedEventArgs e)
+         {
+             StartClass.start("http://www.lostfilm.tv");
+         }
+
+         void InterfaceIsVisible()
+         {
+             gvMain.Visibility = Visibility.Visible;
+             refreshButton.Visibility = Visibility.Visible;
+         }
     }
 }

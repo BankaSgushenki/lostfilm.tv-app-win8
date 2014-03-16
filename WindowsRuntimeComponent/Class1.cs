@@ -31,6 +31,7 @@ namespace WindowsRuntimeComponent
         try        
         {
             SendNotification("asdasdasdasdasdsad");
+            
         }  
         finally        
         {           

@@ -145,6 +145,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\WindowsRuntimeComponent\WindowsRuntimeComponent.csproj">
       <Project>{e6039707-90df-4380-b65f-c5293a0290f2}</Project>
       <Name>WindowsRuntimeComponent</Name>
