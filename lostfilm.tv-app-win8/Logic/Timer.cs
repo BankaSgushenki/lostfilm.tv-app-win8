@@ -7,10 +7,10 @@ namespace lostfilm.tv_app_win8.Logic
     {
         public static DispatcherTimer timer = new DispatcherTimer();
 
-        public static void setTimer(int timerPeriod)
+        public static void setRefreshTimer(int refreshPeriod)
         {
             timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, timerPeriod);
+            timer.Interval = new TimeSpan(00, 0, refreshPeriod);
             timer.Start();
         }
 
