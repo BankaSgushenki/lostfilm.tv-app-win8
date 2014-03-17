@@ -62,7 +62,9 @@ namespace lostfilm.tv_app_win8.DataScraping
             currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
             currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodLocation);
             currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodLocation);
-            currentEpisod.id = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
+            string temp = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
+            temp = temp.Substring(7, 8);
+            currentEpisod.id += temp;
             EpisodFormat(currentEpisod);
             await Scraper.findDescription(currentEpisod);
             return currentEpisod;
@@ -70,19 +72,17 @@ namespace lostfilm.tv_app_win8.DataScraping
 
         public static void EpisodFormat(Episod currentEpisod)
         {
-            string pattern = "<wbr>";
-            Regex rgx = new Regex(pattern);
-            currentEpisod.episodTitle = rgx.Replace(currentEpisod.episodTitle, "");
+
+            currentEpisod.episodTitle = clearFromHtml(currentEpisod.episodTitle);
 
             string pattern2 = "'";
             Regex rgx2 = new Regex(pattern2);
             currentEpisod.id = rgx2.Replace(currentEpisod.id, "");
 
-            currentEpisod.id = currentEpisod.id.Substring(5, 5);
 
             string pattern3 = ",";
             Regex rgx3 = new Regex(pattern3);
-            currentEpisod.id = rgx3.Replace(currentEpisod.id, " - ");
+            currentEpisod.id = rgx3.Replace(currentEpisod.id, ", серия  ");
         
         }
 
@@ -91,19 +91,29 @@ namespace lostfilm.tv_app_win8.DataScraping
             string responce = await Request.getInfo(Selected.detailsPath);
             Selected.description = Scraper.GetHtmlString("font-weight: bold\">", "<div class=\"content\">", responce, 0);
             Selected.description = Scraper.GetHtmlString("<span>", "</span>", Selected.description, 0);
-
-            string pattern = "<br>";
-            Regex rgx = new Regex(pattern);
-            Selected.description = rgx.Replace(Selected.description, "");
-
-            string pattern2 = "<br/>";
-            Regex rgx2 = new Regex(pattern2);
-            Selected.description = rgx2.Replace(Selected.description, "");
-
+ 
+            Selected.description = clearFromHtml(Selected.description);
 
             string temp = Scraper.GetHtmlString("color:gray", "label", responce, 0);
             temp = Scraper.GetHtmlString("<span><b>", "</b>", responce, 0);
             Selected.rating += temp;
+        }
+
+        public static string clearFromHtml(string data)
+        {
+            int openTagIndex = 1;
+            int closeTagIndex = 1;
+
+            while (true)
+            {
+                openTagIndex = data.IndexOf('<', closeTagIndex);
+                if (openTagIndex == -1)
+                    break;
+                closeTagIndex = data.IndexOf('>', openTagIndex);
+                data = data.Remove(openTagIndex, closeTagIndex - openTagIndex + 1);
+                closeTagIndex = openTagIndex;
+            }
+            return data;
         }
     }
 }
