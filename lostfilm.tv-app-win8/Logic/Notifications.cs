@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Notifications;
+﻿using Windows.UI.Notifications;
 using NotificationsExtensions.ToastContent;
 using NotificationsExtensions.TileContent;
-using Windows.UI.Notifications;
-using Windows.Data.Xml.Dom;
 
 using  lostfilm.tv_app_win8.Model;
 

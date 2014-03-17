@@ -1,10 +1,6 @@
-﻿using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Notifications;
-using Windows.UI.Notifications;
+﻿using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Popups;
 
 
 namespace WindowsRuntimeComponent
@@ -30,8 +26,7 @@ namespace WindowsRuntimeComponent
             var deferral = taskInstance.GetDeferral(); 
         try        
         {
-            SendNotification("asdasdasdasdasdsad");
-            
+            SendNotification("Sample background task!");       
         }  
         finally        
         {           

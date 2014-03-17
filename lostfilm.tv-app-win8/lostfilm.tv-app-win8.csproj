@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="DataFetchers\GetHtml.cs" />
     <Compile Include="DataScraping\Scraper.cs" />
+    <Compile Include="Logic\BackgroundTasks.cs" />
     <Compile Include="Logic\Notifications.cs" />
     <Compile Include="Logic\StartClass.cs" />
     <Compile Include="MainPage.xaml.cs">

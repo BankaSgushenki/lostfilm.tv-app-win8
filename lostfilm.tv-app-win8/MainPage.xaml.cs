@@ -1,34 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Net.Http;
-using Windows.UI.Notifications;
-using NotificationsExtensions.ToastContent;
-using NotificationsExtensions.TileContent;
-using Windows.Data.Xml.Dom;
 using System.Collections.ObjectModel;
 using Windows.System;
-using System.Threading;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 
-using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Logic;
 using lostfilm.tv_app_win8.Model;
-using lostfilm.tv_app_win8.DataScraping;
 
 // Шаблон элемента пустой страницы задокументирован по адресу http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -45,23 +24,12 @@ namespace lostfilm.tv_app_win8
 
         Episod Selected = new Episod();
 
-        private DispatcherTimer timer = new DispatcherTimer();
-
-        private void RegisterBackgroundTask()
-        {
-            foreach (var value in BackgroundTaskRegistration.AllTasks) 
-                value.Value.Unregister(true);
-
-            var timerTrigger = new TimeTrigger(15, false);
-            var builder = new BackgroundTaskBuilder();
-            builder.Name = "SampleBackgroundTask"; builder.TaskEntryPoint = "WindowsRuntimeComponent.SampleBackgroundTask"; builder.SetTrigger(timerTrigger);
-            BackgroundTaskRegistration task = builder.Register(); 
-        }
+        private DispatcherTimer timer = new DispatcherTimer();     
        
 
         public  MainPage()
-        {        
-            RegisterBackgroundTask();
+        {
+            BackgroundTasks.RegisterBackgroundTask();
             timer.Tick += timer_Tick;
             timer.Interval = new TimeSpan(00, 0, 100);
             timer.Start();

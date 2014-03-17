@@ -1,6 +1,4 @@
 ﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using System.Net.Http;
 using System.Threading.Tasks;
 

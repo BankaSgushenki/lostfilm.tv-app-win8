@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
 
-    <Grid Background="#FF4F4F4F">
+    <Grid Background="#FF6A6969">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="628*"/>
             <ColumnDefinition Width="29*"/>
