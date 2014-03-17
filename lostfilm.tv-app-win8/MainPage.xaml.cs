@@ -30,10 +30,7 @@ namespace lostfilm.tv_app_win8
         public  MainPage()
         {
             BackgroundTasks.RegisterBackgroundTask();
-            timer.Tick += timer_Tick;
-            timer.Interval = new TimeSpan(00, 0, 100);
-            timer.Start();
-
+            Timer.setTimer(300);
             Data.EventHandler = new Data.MyEvent(show);
             this.InitializeComponent();          
             StartClass.start("http://www.lostfilm.tv");
@@ -56,13 +53,7 @@ namespace lostfilm.tv_app_win8
         void Button_Click(object sender, RoutedEventArgs e)
         {
             Notifications.Start(currenEpisods.First());           
-        }
-
-         void timer_Tick(object sender, object e)
-         {
-             StartClass.start("http://www.lostfilm.tv");
-         }
-
+        }   
 
          void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
          {
