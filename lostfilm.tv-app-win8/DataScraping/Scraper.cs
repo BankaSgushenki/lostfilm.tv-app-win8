@@ -101,8 +101,8 @@ namespace lostfilm.tv_app_win8.DataScraping
 
         public static string clearFromHtml(string data)
         {
-            int openTagIndex = 1;
-            int closeTagIndex = 1;
+            int openTagIndex = 0;
+            int closeTagIndex = 0;
 
             while (true)
             {
