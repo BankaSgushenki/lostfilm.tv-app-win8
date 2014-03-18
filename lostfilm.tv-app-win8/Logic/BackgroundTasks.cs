@@ -14,8 +14,7 @@ namespace lostfilm.tv_app_win8.Logic
         {
             BacgroundTaskSetup();
 
-            foreach (var value in BackgroundTaskRegistration.AllTasks)
-                value.Value.Unregister(true);
+            deleteAllBackground();
             var builder = new BackgroundTaskBuilder();
             builder.Name = taskName;
             builder.TaskEntryPoint = entryPoint;
@@ -34,6 +33,12 @@ namespace lostfilm.tv_app_win8.Logic
             SystemCondition userCondition = new SystemCondition(SystemConditionType.UserPresent);
             taskName = "SampleBackgroundTask";
             entryPoint = "WindowsRuntimeComponent.SampleBackgroundTask";
+        }
+
+        public static void deleteAllBackground()
+        {
+            foreach (var value in BackgroundTaskRegistration.AllTasks)
+                value.Value.Unregister(true);
         }
     }
 }

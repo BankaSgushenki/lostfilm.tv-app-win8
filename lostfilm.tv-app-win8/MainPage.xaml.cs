@@ -15,7 +15,7 @@ namespace lostfilm.tv_app_win8
     {
         Episod currentFirstEpisod;
 
-        private ObservableCollection<Episod> currenEpisods;
+        private ObservableCollection<Episod> currentEpisods;
 
         Episod Selected = new Episod();   
        
@@ -32,13 +32,23 @@ namespace lostfilm.tv_app_win8
 
         void show(ObservableCollection<Episod> current)
         {
+            if (currentEpisods == null)
+            {
+                currentEpisods = current;
+                currentFirstEpisod = currentEpisods.First();
+                Notifications.Start(currentEpisods.First());
+
+                gvMain.ItemsSource = currentEpisods;
+                InterfaceIsVisible();
+                return;
+            }
             if (!Episod.Equals(current.First(), currentFirstEpisod))
             {
-                currenEpisods = current;
-                currentFirstEpisod = currenEpisods.First();
-                Notifications.Start(currenEpisods.First());
+                currentEpisods.Add(current.First());
+                currentFirstEpisod = currentEpisods.First();
+                Notifications.Start(currentEpisods.First());
 
-                gvMain.ItemsSource = currenEpisods;
+                gvMain.ItemsSource = currentEpisods;
                 InterfaceIsVisible();
             }
         }
@@ -71,6 +81,12 @@ namespace lostfilm.tv_app_win8
          {
              gvMain.Visibility = Visibility.Visible;
              refreshButton.Visibility = Visibility.Visible;
+         }
+
+         private void exitButton_Click(object sender, RoutedEventArgs e)
+         {
+             BackgroundTasks.deleteAllBackground();
+             Application.Current.Exit();
          }
     }
 }
