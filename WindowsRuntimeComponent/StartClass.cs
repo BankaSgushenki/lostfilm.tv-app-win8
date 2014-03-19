@@ -10,7 +10,6 @@ namespace WindowsRuntimeComponent
         {               
             string responce = await Request.getInfo(URL);
             await Scraper.scrap(responce);
-            SampleBackgroundTask.SendNotification(EpisodsList.currentEpisod.showTitle);         
             return;           
         }
 

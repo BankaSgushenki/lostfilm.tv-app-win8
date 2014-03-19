@@ -26,6 +26,7 @@ namespace WindowsRuntimeComponent
         {
         BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
         await StartClass.start("http://www.lostfilm.tv");
+        SendNotification(EpisodsList.currentEpisod.showTitle + " - новая серия уже доступна.");
         deferral.Complete();
         }
 
