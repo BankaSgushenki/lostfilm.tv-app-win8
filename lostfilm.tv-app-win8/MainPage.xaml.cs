@@ -12,10 +12,9 @@ namespace lostfilm.tv_app_win8
     
     public sealed partial class MainPage : Page
     {
-
-        Episod Selected = new Episod();   
+        Episod Selected = new Episod();
+        Episod currentFirstEpisode;
        
-
         public  MainPage()
         {
             BackgroundTasks.RegisterBackgroundTask();
@@ -27,10 +26,14 @@ namespace lostfilm.tv_app_win8
 
 
         void show()
-        {                        
+        {
+            if (!Episod.Equals(EpisodsList.currentEpisods.First(), currentFirstEpisode))
+            {
                 Notifications.Start(EpisodsList.currentEpisods.First());
                 gvMain.ItemsSource = EpisodsList.currentEpisods;
                 InterfaceIsVisible();
+                currentFirstEpisode = EpisodsList.currentEpisods.First();
+            }
           
         }
     
