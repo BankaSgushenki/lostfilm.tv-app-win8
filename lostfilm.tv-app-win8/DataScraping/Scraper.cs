@@ -12,16 +12,16 @@ namespace lostfilm.tv_app_win8.DataScraping
     class Scraper
     {
 
-        public async static Task<ObservableCollection<Episod>> scrap(string html)
+        public async static Task scrap(string html)
         {
             List<int> indexes = new List<int>();
-            ObservableCollection<Episod> currentEpisods = new ObservableCollection<Episod>();
+            Episod temp = new Episod();
             indexes = GetElementIndex(html, "text-decoration:none\">");
             foreach (var value in indexes)
             {
-               currentEpisods.Add(await GetEpisodInfo(html, value));
-            }   
-            return currentEpisods;
+                EpisodsList.currentEpisods.Add(await GetEpisodInfo(html, value));
+            }
+            return;
         }
 
         public static string GetHtmlString(string leftBorder, string rightBorder, string html, int location)  //return substring, which is between "leftBorder" and "rightBorder"

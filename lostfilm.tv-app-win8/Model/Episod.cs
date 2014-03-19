@@ -1,6 +1,12 @@
-﻿
+﻿using System.Collections.ObjectModel;
+
 namespace lostfilm.tv_app_win8.Model
 {
+    class EpisodsList
+    {
+       public static ObservableCollection<Episod> currentEpisods = new ObservableCollection<Episod>();
+    }
+
     class Episod
     {
         public Episod()

@@ -13,9 +13,6 @@ namespace lostfilm.tv_app_win8
     
     public sealed partial class MainPage : Page
     {
-        Episod currentFirstEpisod;
-
-        private ObservableCollection<Episod> currentEpisods;
 
         Episod Selected = new Episod();   
        
@@ -30,27 +27,12 @@ namespace lostfilm.tv_app_win8
         }
 
 
-        void show(ObservableCollection<Episod> current)
-        {
-            if (currentEpisods == null)
-            {
-                currentEpisods = current;
-                currentFirstEpisod = currentEpisods.First();
-                Notifications.Start(currentEpisods.First());
-
-                gvMain.ItemsSource = currentEpisods;
+        void show()
+        {                        
+                Notifications.Start(EpisodsList.currentEpisods.First());
+                gvMain.ItemsSource = EpisodsList.currentEpisods;
                 InterfaceIsVisible();
-                return;
-            }
-            if (!Episod.Equals(current.First(), currentFirstEpisod))
-            {
-                currentEpisods.Add(current.First());
-                currentFirstEpisod = currentEpisods.First();
-                Notifications.Start(currentEpisods.First());
-
-                gvMain.ItemsSource = currentEpisods;
-                InterfaceIsVisible();
-            }
+          
         }
     
          void gvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
