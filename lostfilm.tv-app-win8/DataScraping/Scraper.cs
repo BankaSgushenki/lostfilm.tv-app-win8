@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using Windows.UI.Popups;
 
 using lostfilm.tv_app_win8.Model;
 using lostfilm.tv_app_win8.DataFetchers;
@@ -17,11 +18,23 @@ namespace lostfilm.tv_app_win8.DataScraping
             List<int> indexes = new List<int>();
             Episod temp = new Episod();
             indexes = GetElementIndex(html, "text-decoration:none\">");
-            foreach (var value in indexes)
-            {
-                EpisodsList.currentEpisods.Add(await GetEpisodInfo(html, value));
+            if (EpisodsList.currentEpisods.Count == 0)
+            {              
+                foreach (var value in indexes)
+                {
+                    EpisodsList.currentEpisods.Add(await GetEpisodInfo(html, value));
+                }
+               
+                return;
             }
-            return;
+            else
+            {              
+                temp = await GetEpisodInfo(html, indexes.First());
+                if (!Episod.Equals(EpisodsList.currentEpisods.First(), temp))
+                    EpisodsList.currentEpisods.Insert(0, temp);
+                return;
+            }
+
         }
 
         public static string GetHtmlString(string leftBorder, string rightBorder, string html, int location)  //return substring, which is between "leftBorder" and "rightBorder"

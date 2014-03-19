@@ -2,7 +2,6 @@
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Collections.ObjectModel;
 using Windows.System;
 
 using lostfilm.tv_app_win8.Logic;
