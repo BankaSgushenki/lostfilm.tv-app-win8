@@ -15,9 +15,7 @@ namespace WindowsRuntimeComponent
             IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
             templateContent.TextHeadingWrap.Text = currenEpisods.showTitle + " - новая серия уже доступна.";
             templateContent.TextBody.Text = currenEpisods.episodTitle;
-            templateContent.Image.Src = currenEpisods.imagePath;
-            //templateContent.Image.Src = "http://www.lostfilm.tv/Static/icons/cat_bates_motel.jpeg";
-
+            templateContent.Image.Src = currenEpisods.imagePath;    
             toastContent = templateContent;
             ToastNotification toast = toastContent.CreateNotification();
 
