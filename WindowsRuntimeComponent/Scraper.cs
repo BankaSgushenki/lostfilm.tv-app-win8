@@ -3,35 +3,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-using lostfilm.tv_app_win8.Model;
-using lostfilm.tv_app_win8.DataFetchers;
-
-namespace lostfilm.tv_app_win8.DataScraping
+namespace WindowsRuntimeComponent
 {
     class Scraper
     {
 
         public async static Task scrap(string html)
-        {
+        {           
             List<int> indexes = new List<int>();
-            Episod temp = new Episod();
-            indexes = GetElementIndex(html, "text-decoration:none\">");
-            if (EpisodsList.currentEpisods.Count == 0)
-            {              
-                foreach (var value in indexes)
-                {
-                    EpisodsList.currentEpisods.Add(await GetEpisodInfo(html, value));
-                }
-               
-                return;
-            }
-            else
-            {              
-                temp = await GetEpisodInfo(html, indexes.First());
-                if (!Episod.Equals(EpisodsList.currentEpisods.First(), temp))
-                    EpisodsList.currentEpisods.Insert(0, temp);
-                return;
-            }
+            EpisodsList.currentEpisod = await GetEpisodInfo(html, 0);
+            return;
 
         }
 
@@ -69,15 +50,6 @@ namespace lostfilm.tv_app_win8.DataScraping
         {
             Episod currentEpisod = new Episod();
             currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodLocation);
-            currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodLocation);
-            currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
-            currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodLocation);
-            currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodLocation);
-            string temp = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
-            temp = temp.Substring(7, 8);
-            currentEpisod.id += temp;
-            EpisodFormat(currentEpisod);
-            await Scraper.findDescription(currentEpisod);
             return currentEpisod;
         }
 

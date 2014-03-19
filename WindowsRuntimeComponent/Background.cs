@@ -1,13 +1,14 @@
 ﻿using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
 using Windows.ApplicationModel.Background;
+using System.Threading.Tasks;
 
 
 namespace WindowsRuntimeComponent
 {
     public sealed class SampleBackgroundTask : IBackgroundTask 
     {
-        private void SendNotification(string text)
+        public static void SendNotification(string text)
         {
             XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
 
@@ -21,17 +22,12 @@ namespace WindowsRuntimeComponent
             ToastNotificationManager.CreateToastNotifier().Show(notification);
         }
 
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            var deferral = taskInstance.GetDeferral(); 
-        try        
-        {
-            SendNotification("Sample background task!");       
-        }  
-        finally        
-        {           
-            deferral.Complete();        
-        }   
+        BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
+        await StartClass.start("http://www.lostfilm.tv");
+        deferral.Complete();
         }
+
     }
 }
