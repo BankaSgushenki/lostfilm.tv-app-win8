@@ -7,7 +7,7 @@ namespace WindowsRuntimeComponent
         public static Episod currentEpisod = new Episod();
     }
 
-    class Episod
+    public sealed class Episod
     {
         public Episod()
         {

@@ -108,6 +108,17 @@
     <Compile Include="Scraper.cs" />
     <Compile Include="StartClass.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="NotificationsExtensions.WinRT">
+      <HintPath>..\packages\NotificationsExtensions.WinRT.1.0.1\lib\netcore45\NotificationsExtensions.WinRT.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

@@ -29,6 +29,8 @@ namespace WindowsRuntimeComponent
         {
             Episod currentEpisod = new Episod();
             currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodLocation);
+            currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodLocation);
+            currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
             return currentEpisod;
         }
 

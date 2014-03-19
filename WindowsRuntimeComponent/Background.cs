@@ -2,31 +2,33 @@
 using Windows.Data.Xml.Dom;
 using Windows.ApplicationModel.Background;
 using System.Threading.Tasks;
+using NotificationsExtensions.ToastContent;
 
 
 namespace WindowsRuntimeComponent
 {
     public sealed class SampleBackgroundTask : IBackgroundTask 
     {
-        public static void SendNotification(string text)
+        public static void NotificationSend(Episod currenEpisods)
         {
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+            IToastNotificationContent toastContent = null;
+            IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
+            templateContent.TextHeadingWrap.Text = currenEpisods.showTitle + " - новая серия уже доступна.";
+            templateContent.TextBody.Text = currenEpisods.episodTitle;
+            templateContent.Image.Src = currenEpisods.imagePath;
+            //templateContent.Image.Src = "http://www.lostfilm.tv/Static/icons/cat_bates_motel.jpeg";
 
-            XmlNodeList elements = toastXml.GetElementsByTagName("text");
-            foreach (IXmlNode node in elements)
-            {
-                node.InnerText = text;
-            }
+            toastContent = templateContent;
+            ToastNotification toast = toastContent.CreateNotification();
 
-            ToastNotification notification = new ToastNotification(toastXml);
-            ToastNotificationManager.CreateToastNotifier().Show(notification);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
         BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
         await StartClass.start("http://www.lostfilm.tv");
-        SendNotification(EpisodsList.currentEpisod.showTitle + " - новая серия уже доступна.");
+        NotificationSend(EpisodsList.currentEpisod);
         deferral.Complete();
         }
 
