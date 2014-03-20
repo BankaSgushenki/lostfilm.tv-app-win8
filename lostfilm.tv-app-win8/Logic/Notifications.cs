@@ -24,9 +24,9 @@ namespace lostfilm.tv_app_win8.Logic
 
         public static void TitleUpdate(Episod currenEpisods)
         {
-            ITileSquareBlock tileContent = TileContentFactory.CreateTileSquareBlock();
-            tileContent.TextBlock.Text = currenEpisods.showTitle;
-            tileContent.TextSubBlock.Text = currenEpisods.episodTitle;
+            ITileWideImage tileContent = TileContentFactory.CreateTileWideImage();
+            tileContent.Image.Src = currenEpisods.posterPath;
+            tileContent.RequireSquareContent = false;
             TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
         }
 
