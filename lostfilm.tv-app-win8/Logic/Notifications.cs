@@ -8,7 +8,7 @@ namespace lostfilm.tv_app_win8.Logic
 {
     class Notifications
     {
-        public static void NotificationSend(Episod currenEpisods)
+        protected static void NotificationSend(Episod currenEpisods)
         {
             IToastNotificationContent toastContent = null;
             IToastImageAndText03 templateContent = ToastContentFactory.CreateToastImageAndText03();
@@ -22,7 +22,7 @@ namespace lostfilm.tv_app_win8.Logic
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
-        public static void TitleUpdate(Episod currenEpisods)
+        protected static void TitleUpdate(Episod currenEpisods)
         {
             ITileWideImage tileContent = TileContentFactory.CreateTileWideImage();
             tileContent.Image.Src = currenEpisods.posterPath;

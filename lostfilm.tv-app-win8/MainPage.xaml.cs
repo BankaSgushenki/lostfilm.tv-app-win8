@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.System;
+using Windows.UI.Xaml.Navigation;
 
 using lostfilm.tv_app_win8.Logic;
 using lostfilm.tv_app_win8.Model;
@@ -17,9 +18,10 @@ namespace lostfilm.tv_app_win8
        
         public  MainPage()
         {
+            Data.EventHandler = new Data.MyEvent(show);
             BackgroundTasks.RegisterBackgroundTask();
             Timer.setRefreshTimer(300);
-            Data.EventHandler = new Data.MyEvent(show);
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             this.InitializeComponent();          
             StartClass.start("http://www.lostfilm.tv");
         }
@@ -67,10 +69,10 @@ namespace lostfilm.tv_app_win8
              refreshButton.Visibility = Visibility.Visible;
          }
 
-         private void exitButton_Click(object sender, RoutedEventArgs e)
+         private void settingsButton_Click(object sender, RoutedEventArgs e)
          {
-             BackgroundTasks.deleteAllBackground();
-             Application.Current.Exit();
+             this.Frame.Navigate(typeof(SettingsPage));
+
          }
     }
 }

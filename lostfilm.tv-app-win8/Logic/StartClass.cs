@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
+﻿
 using lostfilm.tv_app_win8.DataFetchers;
 using lostfilm.tv_app_win8.Model;
 using lostfilm.tv_app_win8.DataScraping;
