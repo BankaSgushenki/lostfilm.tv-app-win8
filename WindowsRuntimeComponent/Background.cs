@@ -29,7 +29,7 @@ namespace WindowsRuntimeComponent
         {
         BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
         await StartClass.start("http://www.lostfilm.tv");
-        ReadFile();
+        //ReadFile();
         NotificationSend(EpisodsList.currentEpisod);
         deferral.Complete();
         }
