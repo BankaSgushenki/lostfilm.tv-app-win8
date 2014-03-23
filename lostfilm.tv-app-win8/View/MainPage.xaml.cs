@@ -67,6 +67,7 @@ namespace lostfilm.tv_app_win8
          {
              gvMain.Visibility = Visibility.Visible;
              refreshButton.Visibility = Visibility.Visible;
+             settingsButton.Visibility = Visibility.Visible;
          }
 
          private void settingsButton_Click(object sender, RoutedEventArgs e)
