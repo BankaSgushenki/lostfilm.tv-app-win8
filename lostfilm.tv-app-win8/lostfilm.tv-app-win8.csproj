@@ -132,7 +132,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Folders-OS-Configure-alt-2-Metro-icon.png" />
+    <Content Include="Assets\Folders-OS-Configure-alt-3-Metro-icon.png" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\Other-Power-Restart-Metro-icon.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
