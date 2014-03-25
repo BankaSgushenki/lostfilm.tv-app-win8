@@ -29,8 +29,7 @@
                         <StackPanel 
                             VerticalAlignment="Bottom"
                             Height="150"
-                            Background="{StaticResource                  
-                            ListViewItemOverlayBackgroundThemeBrush}">
+                            Background="#FF646464">
 
                             <TextBlock Text="{Binding showTitle}"
                             FontSize="20"
@@ -75,9 +74,11 @@
         </GridView>
 
         <TextBlock HorizontalAlignment="Left" Margin="614,58,0,0" TextWrapping="Wrap" Text="Недавно добавленное на Lostfilm.tv" VerticalAlignment="Top" Height="62" Width="649" FontSize="36" Foreground="#FF535151"/>
-        <TextBox x:Name="descriptionBox"  ScrollViewer.VerticalScrollBarVisibility="Visible"  HorizontalAlignment="Left" BorderThickness="1" BorderBrush="LightSlateGray" IsReadOnly="True" Background="White" Margin="128,591,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="359" Width="706" Foreground="#FF535151"/>
-        <Button x:Name="refreshButton"  Content="Обновить" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="135,55,0,0" VerticalAlignment="Top" Height="63" Width="187" Click="Refresh_Click" FontSize="18" Background="#FF707070"/>
-        <Button x:Name="settingsButton" Content="Настройки"  FontSize="18" Visibility="Collapsed" HorizontalAlignment="Left" Margin="396,55,0,0" Height="63" Width="187" VerticalAlignment="Top" Click="settingsButton_Click" Background="#FF707070"/>
+        <TextBox x:Name="descriptionBox"   HorizontalAlignment="Left" BorderThickness="0" BorderBrush="LightSlateGray" IsReadOnly="True" Background="Transparent" Margin="135,642,0,0" FontSize="20" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="359" Width="1630" Foreground="#FF535151"/>
+        <Button x:Name="refreshButton"  Content="Обновить" Visibility="Collapsed"  HorizontalAlignment="Left" Margin="135,55,0,0" VerticalAlignment="Top" Height="63" Width="187" Click="Refresh_Click" FontSize="18" Background="#FF707070" RequestedTheme="Light" BorderBrush="#33000000"/>
+        <Button x:Name="settingsButton" Content="Настройки"  FontSize="18" Visibility="Collapsed" HorizontalAlignment="Left" Margin="396,55,0,0" Height="63" Width="187" VerticalAlignment="Top" Click="settingsButton_Click" Background="#FF707070" RequestedTheme="Light" BorderBrush="#33000000"/>
+        <ProgressRing x:Name="progressRing" HorizontalAlignment="Left" Margin="1263,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.5" Height="71" Width="74"/>
+        <SearchBox HorizontalAlignment="Left" Margin="1453,58,0,0" VerticalAlignment="Top" Height="47" Width="255"/>
 
     </Grid>
 </Page>

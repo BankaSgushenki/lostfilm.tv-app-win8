@@ -22,13 +22,15 @@ namespace lostfilm.tv_app_win8
             BackgroundTasks.RegisterBackgroundTask();
             Timer.setRefreshTimer(300);
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
-            this.InitializeComponent();          
+            this.InitializeComponent();
+            progressRing.IsActive = true;
             StartClass.start("http://www.lostfilm.tv");
         }
 
 
         void show()
         {
+            progressRing.IsActive = false;
             if (!Episod.Equals(EpisodsList.currentEpisods.First(), currentFirstEpisode))
             {
                 Notifications.Start(EpisodsList.currentEpisods.First());
@@ -60,6 +62,7 @@ namespace lostfilm.tv_app_win8
 
          private void Refresh_Click(object sender, RoutedEventArgs e)
          {
+             progressRing.IsActive = true;
              StartClass.start("http://www.lostfilm.tv");
          }
 
