@@ -31,6 +31,7 @@ namespace WindowsRuntimeComponent
             EpisodsList.currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodeLocation);
             EpisodsList.currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodeLocation);
             EpisodsList.currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodeLocation);
+            EpisodsList.currentEpisod.episodTitle = clearFromHtml(EpisodsList.currentEpisod.episodTitle);
         }
 
         public static void EpisodFormat(Episod currentEpisode)
@@ -65,6 +66,23 @@ namespace WindowsRuntimeComponent
                     break;
             }
             return index;
+        }
+
+        public static string clearFromHtml(string data)
+        {
+            int openTagIndex = 0;
+            int closeTagIndex = 0;
+
+            while (true)
+            {
+                openTagIndex = data.IndexOf('<', closeTagIndex);
+                if (openTagIndex == -1)
+                    break;
+                closeTagIndex = data.IndexOf('>', openTagIndex);
+                data = data.Remove(openTagIndex, closeTagIndex - openTagIndex + 1);
+                closeTagIndex = openTagIndex;
+            }
+            return data;
         }
     }
 }
