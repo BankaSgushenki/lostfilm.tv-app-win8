@@ -65,15 +65,15 @@ namespace lostfilm.tv_app_win8.DataScraping
             return index;
         }
 
-        public async static Task<Episod> GetEpisodInfo(string html, int EpisodLocation)
+        public async static Task<Episod> GetEpisodInfo(string html, int EpisodeLocation)
         {
             Episod currentEpisod = new Episod();
-            currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodLocation);
-            currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodLocation);
-            currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodLocation);
-            currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodLocation);
-            currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodLocation);
-            string temp = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodLocation);
+            currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodeLocation);
+            currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodeLocation);
+            currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodeLocation);
+            currentEpisod.detailsPath += GetHtmlString("a href=\"", "\"><img src=", html, EpisodeLocation);
+            currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodeLocation);
+            string temp = GetHtmlString("ShowAllReleases", "\"></a>", html, EpisodeLocation);
             temp = temp.Substring(7, 8);
             currentEpisod.id += temp;
             EpisodFormat(currentEpisod);

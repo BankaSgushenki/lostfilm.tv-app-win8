@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using NotificationsExtensions.ToastContent;
 using Windows.UI.Popups;
 using System;
+using NotificationsExtensions.TileContent;
 
 
 
@@ -25,12 +26,21 @@ namespace WindowsRuntimeComponent
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
 
+        protected static void TitleUpdate(Episod currenEpisods)
+        {
+            ITileWideImage tileContent = TileContentFactory.CreateTileWideImage();
+            tileContent.Image.Src = currenEpisods.posterPath;
+            tileContent.RequireSquareContent = false;
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(tileContent.CreateNotification());
+        }
+
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
         BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
         await StartClass.start("http://www.lostfilm.tv");
         //ReadFile();
         NotificationSend(EpisodsList.currentEpisod);
+        TitleUpdate(EpisodsList.currentEpisod);
         deferral.Complete();
         }
 

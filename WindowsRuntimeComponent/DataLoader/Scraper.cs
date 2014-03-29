@@ -31,6 +31,7 @@ namespace WindowsRuntimeComponent
             EpisodsList.currentEpisod.showTitle = GetHtmlString("text-decoration:none\">", "</a></span>", html, EpisodeLocation);
             EpisodsList.currentEpisod.episodTitle = GetHtmlString("span class=\"torrent_title\"><b>", "</b></span>", html, EpisodeLocation);
             EpisodsList.currentEpisod.imagePath += GetHtmlString("img src=\"", "\" alt=\"", html, EpisodeLocation);
+            EpisodsList.currentEpisod.posterPath += GetHtmlString("img src=\"/Static/icons/cat_", "\" alt=\"", html, EpisodeLocation);
             EpisodsList.currentEpisod.episodTitle = clearFromHtml(EpisodsList.currentEpisod.episodTitle);
         }
 
