@@ -14,7 +14,6 @@ namespace WindowsRuntimeComponent
             indexes = GetElementIndex(html, "text-decoration:none\">");
             GetEpisodeInfo(html, indexes.First());
             return;
-
         }
 
         public static string GetHtmlString(string leftBorder, string rightBorder, string html, int location)
@@ -40,7 +39,6 @@ namespace WindowsRuntimeComponent
             string pattern2 = "'";
             Regex rgx2 = new Regex(pattern2);
             currentEpisode.id = rgx2.Replace(currentEpisode.id, "");
-
 
             string pattern3 = ",";
             Regex rgx3 = new Regex(pattern3);

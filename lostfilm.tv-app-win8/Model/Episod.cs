@@ -36,8 +36,6 @@ namespace lostfilm.tv_app_win8.Model
                 return true;
             else
                 return false;
-
-
         }
     }
 }

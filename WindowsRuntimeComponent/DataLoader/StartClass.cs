@@ -12,7 +12,5 @@ namespace WindowsRuntimeComponent
             await Scraper.scrap(responce);
             return;           
         }
-
     }
-
 }

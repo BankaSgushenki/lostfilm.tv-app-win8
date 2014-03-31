@@ -35,8 +35,6 @@ namespace WindowsRuntimeComponent
                 return true;
             else
                 return false;
-
-
         }
     }
 }
