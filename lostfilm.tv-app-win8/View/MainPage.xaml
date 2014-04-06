@@ -57,7 +57,9 @@
 
                             <Button x:Name="button1" 
                             CommandParameter = "{Binding detailsPath}"
-                            Content="Перейти на сайт" 
+                            Content="Перейти на сайт"
+                            Foreground="#FF666666"
+                            BorderBrush="#FF666666"        
                             HorizontalAlignment="Center"  
                             VerticalAlignment="Top" Width="200" Height="50" Click="openInBrowser_Click"/>
                         </StackPanel>
