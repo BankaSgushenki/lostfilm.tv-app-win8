@@ -77,5 +77,10 @@ namespace lostfilm.tv_app_win8
          {
              this.Frame.Navigate(typeof(SettingsPage));
          }
+
+         private void Button_Click(object sender, RoutedEventArgs e)
+         {
+             this.Frame.Navigate(typeof(FullListPage));
+         }
     }
 }

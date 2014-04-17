@@ -115,6 +115,9 @@
     <Compile Include="Logic\Notifications.cs" />
     <Compile Include="Logic\StartClass.cs" />
     <Compile Include="Logic\Timer.cs" />
+    <Compile Include="View\FullListPage.xaml.cs">
+      <DependentUpon>FullListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\FullListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

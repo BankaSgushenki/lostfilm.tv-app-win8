@@ -92,7 +92,8 @@
             </Button.Foreground>
         </Button>
         <ProgressRing x:Name="progressRing" HorizontalAlignment="Left" Margin="1263,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.541,0.5" Height="71" Width="74"/>
-        <SearchBox HorizontalAlignment="Left" Margin="1453,58,0,0" VerticalAlignment="Top" Height="47" Width="255"/>
+        <SearchBox HorizontalAlignment="Left" Margin="1268,58,0,0" VerticalAlignment="Top" Height="47" Width="255"/>
+        <Button Content="Все сериалы" HorizontalAlignment="Left" Margin="1642,55,-3,0" VerticalAlignment="Top" Height="53" Width="126" Click="Button_Click"/>
 
     </Grid>
 </Page>
